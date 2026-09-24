@@ -233,6 +233,8 @@ function answer(q, btn){
   });
 
   st.tries = (st.tries || 0) + 1;
+  if (st.first == null) st.first = correct ? 1 : 0;      // first-ever answer: prior knowledge, for the class report
+  if (!correct) st.misses = (st.misses || 0) + 1;
   st.ok = correct;
 
   if (correct){
@@ -802,7 +804,44 @@ function completionRecord(){
     scope: MC.recordNote
   };
   r.checksum = fnv(recordBasis(r));
+  r.formatVersion = 2;
+  r.detail = recordDetail();
+  r.detailChecksum = fnv(detailBasis(r));
   return r;
+}
+/* Per-unit detail for the faculty class report (format 2). It has its own checksum so the
+   core record (format 1) and older verifiers are unaffected. */
+function recordDetail(){
+  var units = ORDER.map(function(n){
+    var u = UNITS[n], d = { n:n, part:u.part, title:u.title, status:unitStatus(n),
+      items:u.items.length, ok:0, firstSeen:0, firstRight:0, misses:0, hinted:0, cw:0, retained:false };
+    u.items.forEach(function(id){
+      var st = S.items[id] || {};
+      if (st.ok) d.ok++;
+      if (st.first != null){ d.firstSeen++; if (st.first) d.firstRight++; }
+      d.misses += st.misses || 0;
+      if (st.hint) d.hinted++;
+      if (st.cw) d.cw++;
+      if (st.retained) d.retained = true;
+    });
+    return d;
+  });
+  var c = S.cal || { s:[0,0], f:[0,0], g:[0,0] };
+  return {
+    units: units,
+    calibration: { sure: c.s, fairly: c.f, guessing: c.g },
+    exam: (S.exam.attempts || []).map(function(a){
+      return { at:a.at, pct:a.pct, n:a.n, timedOut:!!a.timedOut, critMiss:a.critMiss || 0, miss:a.miss || {} }; }),
+    studyDays: Object.keys(S.days || {}).length
+  };
+}
+function detailBasis(r){
+  var d = r.detail;
+  return ["vkp-cd1", r.checksum,
+    d.units.map(function(u){ return [u.n, u.status, u.ok, u.firstSeen, u.firstRight, u.misses, u.hinted, u.cw, u.retained ? 1 : 0].join(":"); }).join(","),
+    [d.calibration.sure.join("/"), d.calibration.fairly.join("/"), d.calibration.guessing.join("/")].join(","),
+    d.exam.map(function(a){ return [a.at, a.pct, a.n, a.critMiss].join(":"); }).join(","),
+    d.studyDays].join("|");
 }
 function downloadRecord(){
   var r = completionRecord();
@@ -830,6 +869,7 @@ function poolFromDOM(){
       id: id, unit: ITEMS[id].unit, source: "checkpoint",
       stem: $(".stem", q) ? $(".stem", q).innerHTML : "",
       opts: opts,
+      critical: q.getAttribute("data-critical") === "1",
       rationale: $(".rationale", q) ? $(".rationale", q).innerHTML : ""
     });
   });
@@ -843,8 +883,12 @@ function examLocked(){
   if (e.lockUntil && e.lockUntil > now()) return "cooling";
   return false;
 }
+/* Safety gate (optional, per module): an attempt that misses any item flagged
+   safety-critical does not count towards the applied criterion, whatever its score. */
+function safetyGate(){ return !!(MC && MC.safetyGate); }
+function attemptCounts(a){ return !(safetyGate() && a.critMiss > 0); }
 function bestScore(){
-  return S.exam.attempts.reduce(function(m,a){ return Math.max(m, a.pct); }, 0);
+  return S.exam.attempts.reduce(function(m,a){ return attemptCounts(a) ? Math.max(m, a.pct) : m; }, 0);
 }
 
 function renderCriteria(){
@@ -863,7 +907,8 @@ function renderCriteria(){
     crit(ret >= retT, "2 · Retention", ret + "/" + ORDER.length,
          "units with an item answered correctly ≥24 h after first pass. " + retT + " required — breadth across units, not raw item count.") +
     crit(best >= cut, "3 · Applied", (S.exam.attempts.length ? best + "%" : "—"),
-         "best closed-book integrated score. Cut score " + cut + "% (provisional).");
+         "best closed-book integrated score. Cut score " + cut + "% (provisional)." +
+         (safetyGate() ? " An attempt with any safety-critical miss does not count." : ""));
 
   var ready = (cov === covT) && (ret >= retT) && (best >= cut);
   var gate = $("#certGate");
@@ -889,7 +934,8 @@ function renderCriteria(){
     if (!S.exam.attempts.length) hist.innerHTML = "";
     else hist.innerHTML = "<h4 style='margin-bottom:.4em'>Attempts</h4><ul>" +
       S.exam.attempts.map(function(a,i){
-        return "<li>Attempt " + (i+1) + " — <b>" + a.pct + "%</b> (" + a.right + "/" + a.n + ") on " +
+        return "<li>Attempt " + (i+1) + " — <b>" + a.pct + "%</b> (" + a.right + "/" + a.n + ")" +
+               (attemptCounts(a) ? "" : " · <b>not counted</b> (" + a.critMiss + " safety-critical miss" + (a.critMiss===1?"":"es") + ")") + " on " +
                new Date(a.at).toLocaleString() + "</li>";
       }).join("") + "</ul>";
   }
@@ -960,10 +1006,15 @@ function drawExam(){
 
 function finishExam(timedOut){
   EXAM.done = true;
-  var right = 0;
-  EXAM.qs.forEach(function(q){ if (q.chosen >= 0 && q.opts[q.chosen].correct) right++; });
+  var right = 0, critMiss = 0, miss = {};
+  EXAM.qs.forEach(function(q){
+    var ok = q.chosen >= 0 && q.opts[q.chosen].correct;
+    if (ok) right++;
+    else { if (q.ref.critical) critMiss++; if (q.ref.unit) miss[q.ref.unit] = (miss[q.ref.unit] || 0) + 1; }
+  });
   var pct = Math.round(right / EXAM.qs.length * 100);
-  S.exam.attempts.push({ at:now(), n:EXAM.qs.length, right:right, pct:pct, timedOut:!!timedOut });
+  S.exam.attempts.push({ at:now(), n:EXAM.qs.length, right:right, pct:pct, timedOut:!!timedOut, critMiss:critMiss, miss:miss });
+  var gated = safetyGate() && critMiss > 0;
   S.exam.lockUntil = now() + cfg("lockHours")*3600000;
   save();
 
@@ -981,8 +1032,9 @@ function finishExam(timedOut){
     '<div class="card" style="margin:0">' +
     '<h3>Attempt ' + S.exam.attempts.length + ' — ' + pct + '%' + (timedOut ? " (time expired)" : "") + '</h3>' +
     '<p>' + right + ' of ' + EXAM.qs.length + ' correct. Cut score ' + cut + '%. ' +
-    (pct >= cut ? '<b style="color:var(--green)">Applied-performance criterion met.</b>'
-                : '<b style="color:var(--amber)">Not yet — see the remediation plan below.</b>') + '</p>' +
+    (gated ? '<b style="color:var(--red)">Not counted: ' + critMiss + ' safety-critical item' + (critMiss===1?'':'s') + ' missed.</b> In this module a single safety-critical error means the attempt does not meet the applied criterion, whatever the score.'
+      : (pct >= cut ? '<b style="color:var(--green)">Applied-performance criterion met.</b>'
+                    : '<b style="color:var(--amber)">Not yet — see the remediation plan below.</b>')) + '</p>' +
     (weakList.length
       ? '<div class="box pitfall"><h5>Remediation plan</h5><p>Your misses clustered in these units. Re-open them, re-read the flagged sections, and re-answer their checkpoints cold before your next attempt:</p><p>' +
         weakList.map(function(u){ return '<b>Unit ' + u + '</b> — ' + esc(UNITS[u] ? UNITS[u].title : "") + ' (' + weak[u] + ' missed)'; }).join('<br>') +
@@ -995,7 +1047,7 @@ function finishExam(timedOut){
     var out = EXAM.qs.map(function(q, i){
       var ok = q.chosen >= 0 && q.opts[q.chosen].correct;
       var ci = q.opts.map(function(o,k){ return o.correct ? k : -1; }).filter(function(k){ return k>=0; })[0];
-      return '<div class="q"><div class="qh">Item ' + (i+1) + ' · Unit ' + q.ref.unit + ' · ' +
+      return '<div class="q"><div class="qh">Item ' + (i+1) + ' · Unit ' + q.ref.unit + (q.ref.critical ? ' · <b>safety-critical</b>' : '') + ' · ' +
              (ok ? '<span style="color:var(--green)">correct</span>' : '<span style="color:var(--red)">missed</span>') +
              '</div><p class="stem">' + q.ref.stem + '</p><ol class="opts">' +
              q.opts.map(function(o,k){
