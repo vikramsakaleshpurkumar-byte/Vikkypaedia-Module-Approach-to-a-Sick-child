@@ -1,136 +1,107 @@
 # Approach to the Sick Child
 
-**A self-paced, competency-based module on recognising, stabilising and thinking about the acutely unwell child — built for Indian and other resource-constrained settings.**
+**Live:** https://vikramsakaleshpurkumar-byte.github.io/Vikkypaedia-Module-Approach-to-a-Sick-child/
+**All Vikkypaedia modules:** https://vikramsakaleshpurkumar-byte.github.io/
 
-> *Learn what matters. Understand why it matters. Practise using it. Apply it where you work.*
+A mastery-based, self-paced module on recognising and resuscitating the seriously ill child in the first hour. It is aligned to **WHO ETAT (2016)**, the **Surviving Sepsis Campaign paediatric guidelines 2026**, **AHA/AAP PALS 2025**, the **WHO wasting and nutritional oedema guideline (2023)** and the **WHO recommendations on serious bacterial infection in young infants (2024)**, and it is read across the resource gradient.
 
-**▶ Open the course:** https://vikramsakaleshpurkumar-byte.github.io/Vikkypaedia-Module-Approach-to-a-Sick-child/
+**Version 3.0.0** (built 2026-09-24) is a complete rebuild on the Vikkypaedia Standard engine (v2.1). It expands the earlier 16 units to 20. Progress from the earlier edition is not carried over, because the units and questions have changed; learners who used it see a one-time notice.
 
-A single HTML file. No account, no server, no installation, no internet connection required after the first load. Works on a phone.
+## What it is
 
----
-
-## What this is
-
-Sixteen units taking a learner from *why children die* through to *future directions*, covering the child who is crashing in the emergency room and the child in clinic who simply does not look right.
-
-It is not a set of lecture notes with a quiz bolted on. The module measures **mastery rather than consumption**, tests **retention over weeks**, adapts to the learner, and teaches **two medicines in parallel** — what you would do with a PICU behind you, and what you would do at a CHC at two in the morning with an oxygen concentrator and one working cannula.
+- One self-contained HTML file. No CDN, no framework, no network request. It works offline on a phone.
+- 20 units in 5 Parts, about 28 notional hours. It has 40 checkpoint questions with two-tier hints and rationales that explain why the wrong options are wrong, plus 30 fresh integrative items for the final assessment.
+- Parts: **A** Foundations · **B** ABCDE · **C** Resuscitating shock · **D** Specific emergencies (poisoning, status epilepticus and raised ICP, snake and scorpion envenomation, trauma, burns and drowning) · **E** Special populations and systems (severe wasting, the young infant, occult red flags, complex children, referral, safeguarding, QI and future directions).
+- Every clinical unit has an **India lens**. Where management genuinely differs, it has **ideal and resource-constrained panels** side by side.
 
 ## Who it is for
 
-| Audience | How to use it |
+| Learner | Default depth |
 |---|---|
-| **MBBS undergraduates** | Filter to UG content; mapped to NMC CBME (2024) competency domains |
-| **MD / DNB Paediatrics postgraduates** | Full content including shock phenotypes, PARDS, ventilation, EPAs |
-| **Interns, medical officers, PHC/CHC doctors** | Set the view to the resource-constrained track; Parts A, B and C are the core |
-| **Nurses and nurse educators** | Units 1–8 and 15 map directly to triage, recognition and escalation practice |
-| **Faculty** | Appendices A–D and G are working documents: assessment bank, simulation library, session plans, rubrics, CBME mapping and standard-setting worksheets |
+| MBBS students, interns, nurses | Essentials: Parts A–C |
+| MBBS doctors, PG residents (MD/DNB) | Advanced: Parts A–D |
+| Paediatricians, intensivists, faculty | Expert: all 20 units and appendices |
 
-## What makes it different from a MOOC
+## What makes it different
 
-- **Mastery, not completion.** There is no "mark as read" button. A unit turns green only when its checkpoint items are answered correctly. Opening a unit earns nothing.
-- **Spaced retrieval built in.** Questions return on a Leitner schedule (1 → 3 → 7 → 21 → 60 days), interleaved across topics. Getting one wrong sends it back sooner.
-- **Sequential unlocking with resume.** Parts A→E unlock one at a time. Close the tab, come back in a fortnight, press *Continue*.
-- **Adaptive.** A placement tool sets your path; a wrong answer opens remediation pointing at the specific idea you missed, not the whole unit.
-- **Dual-track clinical content.** Where management genuinely differs, *Ideal setting* and *Resource-constrained setting* sit as equal parallel panels — not a Western protocol with a footnote.
-- **Evidence-governed.** Every design decision is traced to a systematic review or framework in Appendix G, including the ones that argue against parts of the design.
-- **Offline and private.** Nothing is transmitted. No analytics. No account.
+- **Mastery, never completion.** There is no "mark as read" button. A unit is mastered when both of its checkpoints are currently correct.
+- **Part-by-Part unlocking**, and experienced clinicians can clear Parts by challenge.
+- **Spaced retrieval** at 1, 3, 7, 21 and 60 days, with a review queue and a due badge in the top bar.
+- **Confidence-weighted answering.** Learners say how sure they are before answering; "confident and wrong" is flagged and calibration is shown.
+- **A next-step card**, a study-days strip that never shames, and short notices when a unit or Part is earned. There are no points, badges or leaderboards.
+- **The Vikkypaedia Passport** gives one learner profile and one progress summary across every module on this site, with no server.
+- **The drug, fluid and equipment annex is never locked**, and any appendix can be printed.
 
-## Structure
+## What the 2026 sepsis guideline changed, and how the module teaches it
 
-**Part A · Introduction and foundations** — Why children die and the deterioration continuum · The sixty-second assessment (PAT, ETAT, PEWS) · Why children crash late and fast
-
-**Part B · The ABCDE spine** — Airway and breathing · Circulation and shock · Disability, seizures and raised ICP · Exposure, glucose, electrolytes and toxidromes · The sick young infant under 2 months
-
-**Part C · Syndromes** — Sepsis and septic shock · Dehydration, diarrhoea and DKA · Trauma, burns, drowning and envenomation · Severe acute malnutrition
-
-**Part D · The child who *looks* unwell** — Occult red flags: prolonged fever, pallor, faltering growth, cancer and TB · The chronic and complex child
-
-**Part E · Systems and futures** — Referral, transport, communication and safeguarding · Quality, human factors and future directions
-
-**Appendices** — A: assessment bank (key-feature problems, 12 OSCE stations, WPBA tools, entrustment scale) · B: simulation library with PEARLS debriefing script · C: faculty guide, rubrics and standard-setting worksheets · D: CBME curriculum mapping · E: emergency drug and equipment annex · F: references · G: evidence-governed design
-
-Notional learning time ~28 hours.
+- **Without intensive care:** no fluid bolus for sepsis without hypotension (a strong recommendation). For septic shock with hypotension, up to 40 mL/kg in 10–20 mL/kg boluses.
+- **With intensive care:** up to 40–60 mL/kg in the first hour, in 10–20 mL/kg boluses.
+- **Fluid choice:** balanced crystalloid preferred over 0.9% saline; crystalloid over albumin.
+- **Antimicrobials:** within 1 hour for septic shock; within 3 hours for sepsis without shock.
+- **Lactate** is measured as part of the first evaluation.
+- **Vasoactives:** start them through a peripheral line rather than waiting for central access. The guideline found insufficient evidence to prefer adrenaline or noradrenaline.
+- **Hydrocortisone:** not for shock that responds to fluid and vasoactives.
 
 ## Certification
 
-A certificate is issued only on **three independent forms of evidence**, in line with the Ottawa 2020 consensus that pass/fail decisions should not rest on a single data point:
+The module certifies on three independent criteria:
 
-1. **Coverage** — all 16 unit checkpoints mastered
-2. **Retention** — at least 12 of the 16 units evidenced by an item answered correctly again 24 hours or more after it was first passed
-3. **Applied performance** — a closed-book integrated assessment (40 items sampled from a 52-item bank, randomised, timed) at or above the cut score
+1. **Coverage:** all 40 checkpoints currently correct.
+2. **Retention:** at least 15 of the 20 units evidenced by an item answered correctly 24 hours or more after first passing it.
+3. **Applied performance:** a closed-book assessment of 50 items in 75 minutes, 2 attempts, a 24-hour lock between attempts, and a **provisional** 80% cut score.
 
-The certificate downloads as PNG or prints to A4 PDF. It states in print what it does and does not attest.
+**Set your own cut score** with the Angoff, Ebel and Hofstee worksheets in Appendix C before any consequential use.
 
-> **The 85% cut score is provisional.** A cut score chosen by preference is the weakest defensible option — published comparisons of standard-setting methods on the same assessment have produced cuts ranging from about 66% to 86%. If your institution issues this certificate, set the standard locally using the modified Angoff, Ebel or Hofstee worksheets in Appendix C, record the judgements, and change the cut score in the faculty settings panel.
+The certificate carries a default signature for Dr Vikram Sakaleshpur Kumar. It is rendered in the Great Vibes script font (SIL Open Font License) and can be replaced in Faculty settings.
 
-## Using it as a learner
+## Enrolment and completion records
 
-1. Open the link. Nothing to install.
-2. Answer the three placement questions — it will set your level, your clinical setting and your path.
-3. Work through Part A. Attempt each checkpoint **before** re-reading; getting it wrong and being corrected beats re-reading and feeling fluent.
-4. Come back on later days and clear your **retention checks**. This is where durable learning is made, and it is what the certificate's retention criterion measures.
-5. After all 16 units, the final assessment and certificate unlock.
+A four-step first run collects the learner's name and plan, stored in the browser only. The learner can download a JSON **completion record**, and `verify.html` checks it offline. **Records are self-attested:** the checksum is computed by code inside the module, so a match shows the record was not casually altered, not that the learner sat the assessment. Anything used for promotion or credentialling needs a server with authenticated sign-in, which this module deliberately does not have.
 
-Your progress lives in **your browser on that device**. It does not sync between your phone and your laptop, and clearing your browser data will erase it.
+## Faculty adoption
 
-## Adopting it as faculty
+1. Open the module and go to Final assessment → Faculty settings. Set the signatory, signature image, cut score and retention bar.
+2. Click **Export a configured copy**, then rename the file to `index.html` and publish it.
+3. Appendix A has a Miller's-pyramid blueprint, key-feature problems, 12 OSCE stations, WPBA tools and an entrustment scale.
+4. Appendix B has four branching scenarios that run on a doll with printed vital-sign cards.
+5. Appendix C has delivery models, a worked flipped session and the standard-setting worksheets.
 
-Open **Final assessment → Course settings (faculty)** to set the cut score, item count, time limit, attempts allowed, retention bar, signatory details and photograph. Then click **Export a configured copy of this module** — this writes a clean HTML file with your settings and photograph permanently built in. Distribute or host *that* file.
+## Rebuilding and testing it
 
-Appendix C contains session plans, a flipped-classroom design, feedback structures, assessment rubrics, standard-setting worksheets and a Kirkpatrick-based programme evaluation plan.
+```bash
+python content/build_content.py   # units 1–20 from content/*.py → build/20_…60_*.html
+python content/appendices.py      # Appendices A–G → build/80_appendices.html
+python build.py                   # assemble index.html with structural assertions
+python tests/test_full.py; python tests/test_ui.py; python tests/test_enrol.py
+python tests/test_search.py; python tests/test_sig.py; python tests/test_loops.py
+python tests/contrast.py; python tests/offline_test.py; python tests/print_test.py
+```
 
-## Hosting your own copy
-
-1. Create a public repository — for example `approach-to-the-sick-child`.
-2. Configure the module first (settings, signatory, photograph), export the configured copy, and **rename that file to `index.html`**.
-3. Upload `index.html` to the repository root.
-4. **Settings → Pages → Source: Deploy from a branch → Branch: `main`, folder `/ (root)` → Save.**
-5. The site appears within a few minutes at `https://<username>.github.io/<repository>/`.
-
-Two things that will otherwise catch you out:
-
-- **Compress the photograph before embedding it.** It is stored as a base64 data URI, which adds roughly a third to its size and inflates the HTML. Resize to about 400×400px and save at moderate JPEG quality — the certificate renders it at 96px on screen and 164px on the PNG, so a large original buys nothing and costs every learner a slow first load.
-- **Upload the *configured* export, not the original file.** The original has no photograph embedded and will show a typographic monogram instead.
-
-After updating `index.html`, learners may see a cached copy — a hard refresh (Ctrl/Cmd + Shift + R) resolves it.
+`build/05_module.html` holds every module-specific engine value. `build/90_script.html`, `build/89_loops.js`, `build/06_loops.css` and `build/00_head.html` are the shared Vikkypaedia Standard.
 
 ## Privacy
 
-No account, no server, no analytics, no tracking, no cookies, no network requests of any kind. All learner data — answers, mastery record, settings, certificate name — is held in the browser's local storage on the learner's own device and can be erased in one click from within the module. This satisfies the Digital Personal Data Protection Act, 2023 by collecting nothing, and means an institution adopting the module takes on no data-processing obligation.
-
-## Evidence base
-
-**Clinical** — WHO ETAT, IMNCI and the Pocket Book of Hospital Care for Children; AHA–AAP PALS 2025; Surviving Sepsis Campaign Pediatrics 2026; Phoenix sepsis criteria (JAMA 2024); PALICC-2 (2023); NICE NG143 and NG51; WHO PSBI guidance (2015, updated 2024); FEAST (NEJM 2011); EPOCH (JAMA 2018); ESETT (NEJM 2019); PECARN FLUID (NEJM 2018); Indian Academy of Pediatrics and MoHFW national programme guidance.
-
-**Educational design** — Stojan et al. 2022 (BEME Guide No. 69); Regmi & Jones 2020; McGee et al. 2024; Taylor et al. 2023; Trumble et al. 2024; van Gaalen et al. 2021; Thompson & Hughes 2023; Ottawa 2020 consensus statements on programmatic assessment; McKinley & Norcini, AMEE Guide No. 85. Aligned to NMC CBME (2024), WFME, CAST UDL 3.0 and WCAG 2.2.
-
-Full citations are in Appendices F and G.
+Everything is stored in the learner's browser. There is no account, no server, no analytics and no telemetry. The DPDP Act 2023 is satisfied by collecting nothing centrally.
 
 ## Known limitations
 
-Stated openly in **Appendix G**, and worth reading before you adopt it: the retention schedule uses fixed intervals rather than a fitted forgetting curve; two checkpoint items per unit is a thin sample from which to declare mastery; the placement tool is rule-based and self-reported rather than performance-based; a 52-item bank gives limited form-to-form equivalence between exam attempts; the assessment is unproctored; the certificate's verification code is a deterministic hash computed on the learner's own device and is **not** tamper-proof; and none of this has yet been evaluated in learners — Kirkpatrick levels 3 and 4 are unmeasured.
+- Fixed Leitner intervals, not fitted forgetting curves.
+- Two checkpoints per unit is thin sampling.
+- Placement is rule-based.
+- The assessment is unproctored, and completion records are self-attested.
+- The cut score is provisional.
+- Kirkpatrick levels 3 and 4 are unmeasured.
+- Accessibility targets WCAG 2.2 AA but has not been independently audited.
+- The clinical content has not been externally peer reviewed.
+- NMC CBME codes are deliberately left blank in Appendix D; fill them in from Volume II (2024).
+- India epidemiology changes each year; check the current SRS bulletins.
 
-A module that claims to be evidence-governed has to be willing to publish its own weaknesses.
+## Contributing, licence and citation
 
-## Contributing
-
-Guidelines change, and this module cites several that changed between 2023 and 2026. Clinical corrections are especially welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Licence
-
-Content is released under **[Creative Commons Attribution–NonCommercial–ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)**. You may share and adapt it for non-commercial educational purposes, with attribution, provided derivatives carry the same licence.
-
-**Not covered by that licence:** the name *Vikkypaedia*, the name and photograph of Dr Vikram Sakaleshpur Kumar, and the certificate signature block. Any adapted version **must remove these** and substitute its own. An adaptation may not issue certificates bearing his name, photograph or signature.
-
-## How to cite
+See `CONTRIBUTING.md`: clinical corrections come first and need primary sources. Licensed CC BY-NC-SA 4.0, **excluding** the Vikkypaedia name, the name and likeness of Dr Vikram Sakaleshpur Kumar, and the certificate signature block (see `LICENSE.md`).
 
 > Sakaleshpur Kumar V. *Approach to the Sick Child: an evidence-governed, competency-based digital module for resource-constrained settings.* Vikkypaedia; 2026. Available from: https://vikramsakaleshpurkumar-byte.github.io/Vikkypaedia-Module-Approach-to-a-Sick-child/
 
 ## Disclaimer
 
-This module is for education. Doses and thresholds are drawn from the cited guidelines and must be verified against your institution's protocol, a current formulary and the child in front of you before administration. Nothing here attests clinical competence, confers any licence or privilege, or substitutes for accredited life-support certification such as PALS, APLS or ETAT+. It is not accredited for CME or CPD credit unless separately approved by an accrediting body.
-
----
-
-*Built by Dr Vikram Sakaleshpur Kumar · Medical Educator · Vikkypaedia*
+This module is education, not a clinical protocol, and not certification to practise. Verify every dose against your institution's protocol and a current formulary.

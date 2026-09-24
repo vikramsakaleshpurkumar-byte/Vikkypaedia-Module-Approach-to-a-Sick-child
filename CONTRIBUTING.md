@@ -1,55 +1,71 @@
 # Contributing
 
-This module cites guidelines that changed substantially between 2023 and 2026 — PALS was revised in 2025, the Surviving Sepsis paediatric guidelines in 2026, the paediatric sepsis definition in 2024, and the WHO young-infant recommendations in 2024. It will go out of date. The most valuable contribution anyone can make is telling me where it already has.
+Thank you for reading closely enough to want to change something.
 
-## Clinical corrections — highest priority
+## Clinical corrections come first, and they come separately
 
-Open an issue titled **`[Clinical] Unit N — short description`** and include:
+**Open a separate issue or pull request for every clinical correction. Do not bundle a clinical correction with a stylistic one.** A clinical fix should be reviewable and mergeable in minutes; a discussion about phrasing should never be able to delay it.
 
-1. **What the module says** — quote it, and give the unit and section number.
+A clinical correction must include:
+
+1. **Exactly what is wrong** — unit number, section, and the sentence as written.
 2. **What it should say.**
-3. **The source** — guideline name, issuing body, year and edition, or the citation with a DOI or PubMed ID. A link to a summary or a course slide is not enough; the primary source is what will be checked.
-4. **Whether it is a safety issue.** A wrong dose, a wrong threshold, a contraindication omitted, or an algorithm step in the wrong order is urgent. Say so, and I will prioritise it.
+3. **A primary source.** The 2025 AHA/AAP Part 5 guideline, the ILCOR 2025 CoSTR, a named national guideline, or a peer-reviewed paper. Please cite the specific recommendation or page, not the document as a whole.
+4. **Whether it is a safety issue.** Label it `safety` if a learner acting on the current text could harm a patient. These are triaged first and fixed same-day where possible.
 
-Please raise doses, cut-offs and contraindications as separate issues from wording or emphasis, so the urgent ones do not queue behind the stylistic ones.
+Textbook secondary sources, lecture slides, and "this is how we do it at my hospital" are welcome as *context* but are not sufficient on their own to change a stated recommendation.
 
 ## Guideline updates
 
-Open an issue titled **`[Update] <guideline name> <year>`** with the citation, what changed, and which units it affects. If a recommendation was *reviewed and not changed*, that is also worth recording — it saves the next person checking.
+Paediatric emergency guidance changes often &mdash; sepsis in 2026, resuscitation in 2025, young-infant infection in 2024, malnutrition in 2023. If a guideline changes, open an issue titled:
 
-## Educational design
+> `[GUIDELINE UPDATE] <organisation> <year> — <what changed>`
 
-Design decisions are documented with their evidence in **Appendix G**, including a section on where the design is weaker than it looks. Disagreement is welcome, but argue against the evidence cited there rather than from preference — the whole point of that appendix is to make the design contestable.
+List every unit, appendix table and assessment item affected. A guideline change usually touches the unit text, Appendix E, the checkpoint items, the fresh exam items, and the "what changed" table in Unit 3 — missing one of those leaves the module internally contradictory, which is worse than being uniformly out of date.
 
-Useful contributions here include: standard-setting data if you run a formal Angoff or Ebel panel; evaluation data if you use the module with a cohort (Kirkpatrick levels 2–4 are currently unmeasured for this module); accessibility failures found with a screen reader or at 200% zoom.
+## Stylistic and structural suggestions
 
-## New assessment items
+Very welcome, in their own issues. Particularly useful:
 
-Items are welcome, especially for units where the bank is thin. Each item needs:
+- Places where the prose is longer than it needs to be. A sentence that can be deleted without loss should be deleted.
+- Items where a distractor is implausible, or where two options are defensible.
+- Rationales that explain the right answer but not why the wrong ones are wrong.
+- Accessibility problems, especially from screen-reader users. The module targets WCAG 2.2 AA but has not been independently audited, and real user reports are worth more than any automated check.
 
-- A clinical stem with enough detail to be answerable and no detail that gives it away
-- Four options, one unambiguously best, with plausible distractors that represent real errors clinicians make
-- A rationale that explains **why the wrong options are wrong**, not only why the right one is right
-- The unit it belongs to, and whether it is UG or PG level
+## Technical constraints — these are not negotiable
 
-Items testing recall of an isolated number are lower value than items testing a decision.
+The module exists to work where other things do not. Please do not submit changes that:
 
-## Translations
+- **Add a dependency.** No framework, no library, no build step, no package manager. One HTML file.
+- **Add a network request.** No CDN, no web font, no remote image, no analytics endpoint. It must work with the network disconnected, and it must be verifiable that it does.
+- **Add telemetry.** No analytics, no tracking, no "anonymous usage statistics", no error reporting service. The privacy position is that the module collects nothing, and that must remain literally true.
+- **Require an account or a server.**
+- **Break the single-file property.** Images must be embedded as data URIs, and only when they genuinely earn their size.
+- **Introduce a "mark as read" control** or any other way to record progress without demonstrating it. This is the central design commitment.
 
-Translation into Indian languages would substantially extend reach, particularly for nursing and frontline health-worker audiences. Open an issue before starting so effort is not duplicated. A translation is a derivative work: it must carry the CC BY-NC-SA 4.0 licence and must **remove the Vikkypaedia name, the signatory name and the photograph** from the certificate block, substituting its own (see the licence section of the README).
+If you think one of these constraints should change, open an issue arguing the case before writing code.
 
-## Technical
+## Building
 
-The module is a single self-contained HTML file with no build step, no dependencies and no network requests. That constraint is deliberate — it is what lets the module run offline on a phone in a district hospital. Pull requests that introduce a framework, a bundler, a CDN dependency or any external request will not be merged.
+Content lives in `build/` as numbered fragments and is concatenated by `build.py` into `index.html`. Run:
 
-Anything that touches storage must keep learner data local to the device. No analytics, no telemetry, no account, no exceptions.
+```
+python3 build.py
+```
 
-If you change the DOM structure, check that the runtime still works: checkpoints are injected before the first question in each unit, appendix bodies are swapped in and out when locked, and the "Export a configured copy" function sanitises the live DOM back to a pristine state before serialising. Breaking any of these is easy to do and not obvious until a learner exports a corrupted file.
+It enforces structural checks: unit count, unique question ids, exactly one correct option per item, balanced sections, no leftover markers, and that every `getElementById` has a matching `id`. **A pull request that does not build cleanly will not be reviewed.**
+
+## Translation
+
+Translations are genuinely valuable and genuinely welcome — Hindi, Bengali, Marathi, Tamil, Telugu, Kannada and Malayalam would each reach people this module currently does not.
+
+Two requirements:
+
+1. **Clinical review.** A translation must be reviewed by a clinician fluent in the target language who works in paediatric emergency care. Translation errors in doses are the failure mode here, and they are silent.
+2. **The identity carve-out applies.** A translated version must remove the *Vikkypaedia* name, the name and likeness of Dr Vikram Sakaleshpur Kumar, and the certificate signature block, and must not issue certificates bearing his name, photograph or signature. Put your own name on it — you did the work, and you are the one standing behind the clinical accuracy of the text in that language. See `LICENSE.md`.
+
+Please open an issue before starting a translation so effort is not duplicated.
 
 ## Code of conduct
 
-Discuss the content, not the contributor. Clinical disagreement is expected and useful; assume the other person has seen patients you have not.
-
-## Attribution
-
-Contributors of accepted clinical corrections and assessment items will be acknowledged in the repository unless they ask not to be.
+Be decent. Assume the person on the other end is trying to get it right. Disagree about the evidence as much as you like; that is the point.
