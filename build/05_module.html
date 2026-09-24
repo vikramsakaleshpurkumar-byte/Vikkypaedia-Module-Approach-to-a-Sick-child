@@ -1,0 +1,50 @@
+<script>
+/* Module configuration — the only engine-facing file that changes between Vikkypaedia modules. */
+window.VKP_MODULE = {
+  id: "sickchild",
+  slug: "approach-to-the-sick-child",
+  title: "Approach to the Sick Child",
+  version: "3.0.0",
+  build: "2026-09-24",
+  storeKey: "vkp.sickchild.v3",
+  legacyKeys: ["vkp_sickchild_v2"],
+  codePrefix: "SC26",
+  parts: [
+    { key:"A", units:[1,2,3] },
+    { key:"B", units:[4,5,6,7] },
+    { key:"C", units:[8,9,10,11] },
+    { key:"D", units:[12,13,14,15] },
+    { key:"E", units:[16,17,18,19,20] }
+  ],
+  defaults: {
+    cut: 80,            // per cent — PROVISIONAL, set by faculty using Appendix C before consequential use
+    items: 50,
+    minutes: 75,
+    attempts: 2,
+    lockHours: 24,
+    retainUnits: 15     // of 20 units must show ≥24 h retention (75%)
+  },
+  alignedTo: "aligned to WHO ETAT, the Surviving Sepsis Campaign paediatric guidelines 2026 and AHA/AAP PALS 2025",
+  certScopeLines: [
+    "This certificate attests knowledge and clinical reasoning demonstrated by written assessment in a self-paced module. It does not attest bedside",
+    "competence, confers no licence or clinical privilege, and is not a substitute for supervised, hands-on emergency paediatric training (for example",
+    "ETAT, PALS or equivalent courses). It confers no provider status in any named course and is not endorsed by WHO, AHA, AAP or SCCM.",
+    "No CME credit unless separately accredited. The verification code is deterministically re-derivable from the displayed figures — it is not tamper-proof."
+  ],
+  recordNote: "Not an ETAT, PALS or any other named provider course. Confers no provider status, licence or clinical privilege.",
+  scopes: {
+    e: { label:"Parts A–C · 11 units", hours:12 },
+    a: { label:"Parts A–D · 15 units", hours:20 },
+    x: { label:"All 20 units + appendices", hours:28 }
+  },
+  placement: {
+    paths: {
+      many: "You manage sick children routinely, so <b>clear Parts A and B by challenge</b>: open each unit, go straight to the two checkpoint questions and answer them cold. Pass both and the unit is mastered. Miss one and read the unit &mdash; that miss is exactly the gap worth finding. Nobody is skipped past a locked Part; you simply demonstrate mastery faster.",
+      some: "Read Part A quickly, then slow down in <b>Part C</b>. Fluid and sepsis management changed with the 2026 Surviving Sepsis guidelines, and it is where partly-experienced clinicians most often carry an outdated habit.",
+      none: "Work through in order and do not rush Part B &mdash; the ABCDE spine is what every later unit hangs on. Aim for <b>one unit per sitting</b>, and answer retention checks when they appear."
+    },
+    trackRc: "Your clinical panels now default to the <b>resource-constrained track</b> &mdash; no PICU on site, limited monitoring, referral by road. Switch to &lsquo;Both tracks&rsquo; whenever you want to see what an intensive-care setting would do and why.",
+    trackIdeal: "Your clinical panels default to the <b>ideal-setting track</b>. Read the resource-constrained panels at least once: the 2026 sepsis fluid recommendations differ by setting, and you will refer to, receive from or teach in those settings."
+  }
+};
+</script>

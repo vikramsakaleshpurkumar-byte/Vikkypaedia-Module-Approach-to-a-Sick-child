@@ -1,0 +1,70 @@
+<script>
+/* ------------------------------------------------------------------
+   Figure specs. Rendered to inline SVG by figSVG() in the engine.
+   Kinds: band | ask | step | good | warn | crit | note
+   A node with side:1 hangs off node `from` in the right column.
+   `edge` labels the arrow that arrives at the node.
+   `tag`  is a small italic note beside the arrow above the node.
+   ------------------------------------------------------------------ */
+var FIGS = {
+
+"etat": {
+  w: 780, main: 450, side: 290,
+  nodes: [
+    {id:"door", k:"band", t:"CHILD ARRIVES — TRIAGE AT THE DOOR", l:["Under 60 seconds · no investigations · by a trained nurse or health worker"]},
+    {id:"em", k:"ask", t:"Any EMERGENCY sign? (ABCD)",
+     l:["Airway obstructed or absent breathing","Severe respiratory distress · central cyanosis",
+        "Cold hands + capillary refill > 3 s + weak fast pulse","Coma (AVPU P or U) · convulsing now",
+        "Severe dehydration with diarrhoea (any two signs)"]},
+    {id:"treat", k:"crit", side:1, from:"em",
+     t:"YES → EMERGENCY — treat now",
+     l:["Resuscitate at the triage point","Check for severe malnutrition before IV fluid","Call senior help"]},
+    {id:"pr", k:"ask", edge:"NO", t:"Any PRIORITY sign? (3 TPR MOB)",
+     l:["Tiny baby · Temperature · Trauma","Pallor · Poisoning · Pain · Respiratory distress",
+        "Restless / lethargic · Referral","Malnutrition · Oedema of both feet · Burns"]},
+    {id:"front", k:"warn", side:1, from:"pr",
+     t:"YES → PRIORITY — front of the queue", l:["Assess and treat without delay"]},
+    {id:"q", k:"good", edge:"NO", t:"NON-URGENT — queue", l:["Re-triage if anything changes while waiting"]}
+  ]
+},
+
+"sepsis1h": {
+  w: 800, main: 460, side: 300,
+  nodes: [
+    {id:"rec", k:"band", t:"RECOGNISE · SAY \"SEPSIS\" · START THE CLOCK"},
+    {id:"s1", k:"step", t:"First 15 minutes",
+     l:["Oxygen · IV, or IO after 2 attempts or 90 s","Blood culture if it causes no delay",
+        "Glucose · lactate · gas · haemoglobin"]},
+    {id:"abx", k:"crit", t:"ANTIMICROBIALS",
+     l:["Septic shock: within 1 hour (strong)","Sepsis without shock: within 3 hours"]},
+    {id:"q", k:"ask", t:"Intensive care available?"},
+    {id:"icu", k:"step", side:1, from:"q",
+     t:"YES → 10–20 mL/kg boluses", l:["Up to 40–60 mL/kg · stop on overload"]},
+    {id:"hyp", k:"ask", edge:"NO", t:"Hypotensive for age?"},
+    {id:"nobolus", k:"warn", side:1, from:"hyp",
+     t:"NOT hypotensive → NO bolus (strong)", l:["Maintenance fluid","Glucose · treat severe anaemia","Transfer early"]},
+    {id:"bol40", k:"step", edge:"YES", t:"10–20 mL/kg boluses, up to 40 mL/kg", l:["Reassess after every bolus"]},
+    {id:"va", k:"crit", t:"Still shocked, or overload signs?", l:["Vasoactive through a peripheral or IO line","Source control · reassess every 15 minutes"]}
+  ]
+},
+
+"status": {
+  w: 760, main: 440, side: 280,
+  nodes: [
+    {id:"t0", k:"band", t:"0–5 MIN · ABC · GLUCOSE · ACCESS · NOTE THE TIME"},
+    {id:"b1", k:"step", t:"5 min — first benzodiazepine",
+     l:["IV/IO lorazepam 0.1 mg/kg or diazepam 0.2–0.3 mg/kg","No IV: buccal/intranasal midazolam 0.3 mg/kg",
+        "or rectal diazepam 0.5 mg/kg"]},
+    {id:"b2", k:"step", edge:"still seizing", t:"10 min — second benzodiazepine", l:["ONE repeat only"]},
+    {id:"cap", k:"note", side:1, from:"b2", t:"Two doses is the ceiling",
+     l:["More benzodiazepine stops breathing,","not seizures."]},
+    {id:"sl", k:"warn", edge:"still seizing", t:"~20 min — ONE second-line medicine",
+     l:["Levetiracetam 40–60 mg/kg","Phenytoin 20 mg/kg (ECG) or fosphenytoin 20 mg PE/kg",
+        "Valproate 40 mg/kg · phenobarbital 20 mg/kg"]},
+    {id:"ref", k:"crit", edge:"still seizing", t:"~40 min — refractory status",
+     l:["Senior and anaesthetic help","Intubation and midazolam infusion · EEG"]}
+  ]
+}
+
+};
+</script>
