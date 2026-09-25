@@ -4,7 +4,7 @@
   "module": {
     "id": "sickchild",
     "title": "Approach to the Sick Child",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "build": "2026-09-24"
   },
   "learner": {
@@ -15,8 +15,8 @@
     "track": "Advanced",
     "setting": "rc"
   },
-  "enrolledAt": 1790264067735,
-  "issuedAt": 1790264073101,
+  "enrolledAt": 1790267196358,
+  "issuedAt": 1790267204903,
   "result": {
     "unitsMastered": 20,
     "unitsTotal": 20,
@@ -34,10 +34,10 @@
     "name": "Dr Vikram Sakaleshpur Kumar",
     "role": "Medical Educator"
   },
-  "verificationCode": "SC26-0KHO-ARU",
+  "verificationCode": "SC26-0K7O-P2V",
   "attestation": "Self-attested. Generated on the learner's own device from local progress data. Re-derivable, not tamper-proof: treat it as a signed statement by the learner, not as proof issued by a third party.",
   "scope": "Not an ETAT, PALS or any other named provider course. Confers no provider status, licence or clinical privilege.",
-  "checksum": "03G8SYN",
+  "checksum": "1D5YSUD",
   "detail": {
     "units": [
       {
@@ -337,7 +337,7 @@
     },
     "exam": [
       {
-        "at": 1790264071896,
+        "at": 1790267202675,
         "pct": 96,
         "n": 50,
         "timedOut": false,
@@ -345,7 +345,8 @@
         "miss": {}
       }
     ],
-    "studyDays": 0
+    "studyDays": 0,
+    "megacodes": null
   },
-  "detailChecksum": "0YVITUK"
+  "detailChecksum": "0NBAWDF"
 }
